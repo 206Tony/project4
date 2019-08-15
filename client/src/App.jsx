@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import Lego from './Lego';
 
 class App extends React.Component {
   constructor(props) {
@@ -75,21 +76,25 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
-          <p>Hello, {user.name}</p>
+          <p>Hello, {user.name}</p> 
           <p onClick={this.logout}>Logout</p>
         </>
       );
     } else {
       contents = (
-        <>
-          <p>Please signup or login</p>
-          <Login liftToken={this.liftToken} />
-          <Signup liftToken={this.liftToken} />
-        </>
+        <div className='login-page'>
+          <p>Signup or Login</p>
+          <div>
+            <Signup liftToken={this.liftToken}/>
+            <Login liftToken={this.liftToken} />
+          </div>
+        </div>
       )
     }
     return (
-      contents
+      <div>
+        {contents}
+      </div>
     );
   }
 }

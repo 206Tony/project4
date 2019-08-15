@@ -56,12 +56,12 @@ class Login extends React.Component {
                 value={this.state.email}
                 type='email' 
                 name='email' 
-                placeholder='Enter your email...' /><br />
+                placeholder='Enter your email...' />
           <input onChange={this.handlePasswordChange}
                 value={this.state.password}
                 type='password'
                 name='password'
-                placeholder='Enter your password...' /><br />
+                placeholder='Enter your password...' />
           <input type="submit" value="Log in!"/>
         </form>
       </div>
