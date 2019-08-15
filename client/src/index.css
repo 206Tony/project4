@@ -7,9 +7,10 @@ body {
   background-image: url('https://images.unsplash.com/photo-1544816565-aa8c1166648f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');
   background-repeat: no-repeat; 
   background-attachment: fixed;
-  display: inline;
+  /* display: inline; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
 }
 
 code {

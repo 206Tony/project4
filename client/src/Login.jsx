@@ -40,7 +40,7 @@ class Login extends React.Component {
         localStorage.setItem('mernToken', res.data.token)
         this.props.liftToken(res.data)
       }
-    }).catch(err => {
+    }).catch( err => {
       this.setState({
         message: "Maximum login attempts exceeded.  Please try again later."
       })
@@ -49,19 +49,19 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div className="Login">
+      <div className="login-page">
         <h3>Log into your account:</h3>
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleEmailChange}
                 value={this.state.email}
                 type='email' 
                 name='email' 
-                placeholder='Enter your email...' />
+                placeholder='Enter your email...' /><br />
           <input onChange={this.handlePasswordChange}
                 value={this.state.password}
                 type='password'
                 name='password'
-                placeholder='Enter your password...' />
+                placeholder='Enter your password...' /><br />
           <input type="submit" value="Log in!"/>
         </form>
       </div>
