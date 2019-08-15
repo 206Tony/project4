@@ -93,6 +93,7 @@ class App extends React.Component {
     }
     return (
       <div>
+        <Lego/>
         {contents}
       </div>
     );

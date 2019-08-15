@@ -18,7 +18,7 @@ function Lego() {
 
 
   useEffect( () => {
-    axios.get([sets]).then((res) => {
+    axios.get([themes]).then((res) => {
       setLegoSets(res.data.results);
       console.log("Running this many times...")
     })

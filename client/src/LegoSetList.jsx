@@ -8,7 +8,8 @@ function LegoSetList({legoSets}) {
       <div className='list' key={id}>
         <h1>{legoSet.name}</h1>
         <h3>{legoSet.year}</h3>
-        <img src={legoSet.set_img_url}/>
+        <img src={legoSet.set_img_url} alt={legoSet.set_num}/>
+
         <br />
         
       </div>
