@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     maxlength: [99, 'Email must be between 5 and 99 characters']
   },
   // comment: { type: Schema.ObjectId, ref: 'Comment' },
-  brickId: { type: Schema.ObjectId, ref: 'Brick' }
+  bricks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Brick' }]
 });
 
 userSchema.set('toObject', {
@@ -29,7 +29,8 @@ userSchema.set('toObject', {
     let returnJson = {
       _id: ret._id,
       email: ret.email,
-      name: ret.name
+      name: ret.name,
+      bricks: ret.bricks
     }
     return returnJson
   }

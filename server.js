@@ -41,7 +41,7 @@ db.on('error', (err) => {
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));  //.unless({method: 'POST'}) to lock down the post route otherwise we locked down all routes
-
+//app.use('/brick', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/brick'));
 
 app.listen(process.env.PORT, () => {
   console.log(`You're listening to port ${process.env.PORT}...`);
