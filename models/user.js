@@ -20,8 +20,8 @@ const userSchema = new mongoose.Schema({
     minlength: [5, 'Email must be between 5 and 99 characters'],
     maxlength: [99, 'Email must be between 5 and 99 characters']
   },
-  setOwned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SetOwned' }],
-  partNeeded: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PartNeeded' }],
+  setsOwned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SetsOwned' }],
+  //partsNeeded: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PartsNeeded' }],
   comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 

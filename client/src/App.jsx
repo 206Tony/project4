@@ -3,6 +3,7 @@ import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import Lego from './Lego';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class App extends React.Component {
     return (
       <div>
         {contents}
-        <Lego/>
+        {/* <Lego/> */}
       </div>
     );
   }

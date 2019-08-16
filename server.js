@@ -34,8 +34,6 @@ db.on('error', (err) => {
   console.log(`Database error:\n${err}`);
 });
 
-
-
 // app.use('/auth/login', loginLimiter);
 // app.use('/auth/signup', signupLimiter);
 
