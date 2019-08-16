@@ -78,7 +78,7 @@ router.post('/me/from/token', (req, res) => {
         User.findById(user._id, (err, user) => {
           if (err) {
             // if user doesn't exist, return an error
-            res.json({type: 'error', message: 'Database errorduring validation'})
+            res.json({type: 'error', message: 'Database error during validation'})
           } else {
             // if user exists, send back user and token 
 
