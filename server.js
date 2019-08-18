@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 const expressJWT = require('express-jwt');
 const helmet = require('helmet');
 const RateLimit = require('express-rate-limit');
@@ -10,6 +11,8 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(helmet());
+app.use(express.static(__dirname + '/client/build'));  // from drinks
+app.use(methodOverride('_method'));  //from drinks
 
 const loginLimiter = new RateLimit({
   windowMs: 5*60*1000,
@@ -39,7 +42,12 @@ db.on('error', (err) => {
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));  //.unless({method: 'POST'}) to lock down the post route otherwise we locked down all routes
-//app.use('/brick', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/brick'));
+// app.get('/something', function(req, res) {
+//   res.send('hello')
+// })
+app.get('*', function(req, res) {
+	res.sendFile(__dirname + '/client/build/index.html');  // from drinks
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`You're listening to port ${process.env.PORT}...`);

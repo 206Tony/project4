@@ -4,6 +4,12 @@ import Login from './Login';
 import Signup from './Signup';
 import Lego from './Lego';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +18,8 @@ class App extends React.Component {
       token: '',
       user: null,
       errorMessage: '',
-      apiData: null
+      apiData: null,
+      current: {}
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
     this.liftToken = this.liftToken.bind(this);
@@ -76,14 +83,23 @@ class App extends React.Component {
     var contents = ''
     if (user) {
       contents = (
-        <>
-          <p>Hello, {user.name}</p> 
-          <p onClick={this.logout}>Logout</p>
+      <>
+        <nav className="link"> 
+          <Link to='/' >Home</Link>{' '}
+          <Link to='/themes' >Themes</Link>{' '}
+          <Link to='/sets' >Sets</Link>{' '}
+          <Link to={`/favorites/${user._id}/${req.body.data}`} >Favorites</Link>{' '}
+        </nav>
+        <div>
+          <Route exact path="/sets" render = {() => <Lego />} />
+          {/* <Route exact path="/themes" render = {() => <Lego />} />
+          <Route exact path={`/api/${user._id}/${sets}/`} render = {() => <Lego />} /> */}
+        </div>
         </>
       );
     } else {
       contents = (
-        <div className='login-page'>
+        <div className='App'>
           <p>Signup or Login</p>
           <div>
             <Signup liftToken={this.liftToken}/>
@@ -93,10 +109,9 @@ class App extends React.Component {
       )
     }
     return (
-      <div>
-        {contents}
-        {/* <Lego/> */}
-      </div>
+      <Router>      
+        {contents} 
+      </Router>
     );
   }
 }

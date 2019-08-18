@@ -1,13 +1,26 @@
 import React, { useState, useEffect} from 'react';
-import LegoSetList from './LegoSetList';
+import MySets from './MySets';
+import LegoThemes from './LegoThemes';
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 function Lego() {
-  const [legoSets, setLegoSets] = useState([0])
+  const [legoSets, setLegoSets] = useState([])
+  const [legoSetsId, setLegoSetsId] = useState({})
+  const [user, setUserId] = useState([])
+  // const user = 'https://rebrickable.com/api/v3/user/;
+  const sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd';
+  // SHOW only
+  const [themes, legoThemes] = useState([0])
+  const theme = 'https://rebrickable.com/api/v3/lego/themes/?key=36e941f5870960d3742c4fa017ce16fd'
+
+
   //const partsCategories = 'https://rebrickable.com/api/v3/lego/part_category/?key=36e941f5870960d3742c4fa017ce16fd'
-  const themes = 'https://rebrickable.com/api/v3/lego/themes/?key=36e941f5870960d3742c4fa017ce16fd'
   //const parts = 'https://rebrickable.com/api/v3/lego/parts/?key=36e941f5870960d3742c4fa017ce16fd'
-  //const sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd'
   // const [legos, setLegos] = useState([
   //   partsCategories, 
   //   themes, 
@@ -15,18 +28,34 @@ function Lego() {
   //   sets
   // ])
 
-
   useEffect( () => {
-    axios.get([themes]).then((res) => {
+    axios.get(sets).then((res) => { 
       setLegoSets(res.data.results);
       console.log("Running this many times...")
     })
   }, [])
 
+  useEffect( () => {
+    axios.get([theme]).then((res) => { 
+      legoThemes(res.data.results);
+      console.log("Running this many times...")
+    })
+  }, [])
+
+  useEffect( () => {
+    console.log("Running all the sets...")
+    axios.post(`/api/${sets}/`).then((res) => {
+      setUserId(res.data);
+    })
+  }, [user])
+
   return (
-    <div>
-      <LegoSetList legoSets={legoSets}/>
-    </div>
+    <Router>
+      <div>
+        <Route exact path='/sets' render = { () => <MySets legoSets={legoSets} setLegoSetsId={setLegoSetsId}/>}/>
+        <Route exact path='/themes' render = { () => <LegoThemes themes={themes}/> } />
+      </div>
+    </Router>
   )
 }
 
