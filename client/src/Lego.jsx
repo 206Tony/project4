@@ -21,7 +21,7 @@ function Lego(props) {
     setFavorites(newFav);
 
     axios.post(`/api/sets`, {legoSets}).then((res) => {
-      console.log(favorites)
+      favorites(res.data)
     })
   }
 
@@ -68,8 +68,6 @@ function Lego(props) {
       <div>
         <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSetsId={setLegoSetsId} addFav={addFav}/>}/>
         <AddFaves favorites={favorites}  legoSetsId={legoSetsId} handleSetDelete={handleSetDelete}/>
-        {/* <Route exact path='/themes' render = { () => <LegoThemes themes={themes}/> } /> */}
-        {/* <Route exact path='/*' render = { () =><Nav themes={themes} legoThemes={legoThemes} props={props} /> }/> */}
       </div>
     </Router>
   )

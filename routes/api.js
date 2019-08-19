@@ -31,10 +31,14 @@ router.post('/sets', (req, res) => {
       user: req.params._id
   }, 
       function(err, set){
-          user.setsOwned.push(set)
-          user.save(function(err, user){
-            if (err) res.json(err)
-            res.json(user)
+        user.setsOwned.push(set)
+        user.save(function(err, user){
+        if (err) res.json(err)
+          user.findById(req.user._id).populate('setsOwned').exec((err, user) => {
+        // populate user 
+        // then send forward user.setsOwned
+        res.json(user.setOwned)
+        })
       })
     })
   })
@@ -100,4 +104,4 @@ module.exports = router;
     //       path: 'partsNeeded',
     //       model: 'PartsNeeded' 
     //   }]
-    // ).exec((err, user) => {
+    // ).exec((err, user) => 
