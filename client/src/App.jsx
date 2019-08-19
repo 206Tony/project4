@@ -74,12 +74,29 @@ class App extends React.Component {
     this.checkForLocalToken()
     axios.get('https://rebrickable.com/api/v3/lego/themes/?key=36e941f5870960d3742c4fa017ce16fd')
       .then((res) => {
-        const themes = res.data.results[0].name
+        const themes = res.data.results
         this.setState({themes}); 
-      //res.render(res.data.results[0].name);
-      console.log("Running this many times...")
+      //console.log("Running this many times...")
       })
   }
+
+  showFavoriteSets() {
+    //e.preventDefault()
+    let config = {
+        headers: {
+            Authorization: `Bearer ${this.state.token}`
+        }
+    }
+    console.log('config is: ', config)
+    console.log('attempting axios call')
+        axios.get('/api/sets', config).then( result => {
+        console.log("this is the api response: ", result)
+        this.setState({
+            favoriteSets: result.data
+        })
+        console.log("result is: ", result.data)
+    })
+}
 
   logout() {
     // Remove token from localStorage
@@ -123,10 +140,13 @@ class App extends React.Component {
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Themes" id="collasible-nav-dropdown">
-                <NavDropdown.Item href={`/themes/${this.state.themes}`}>{this.state.themes}</NavDropdown.Item>
+                {this.state.themes.map((theme, id) => ( 
+                <NavDropdown.Item href={`/themes`} key={id}>{theme.name}</NavDropdown.Item>
+                ))
+              } 
               </NavDropdown>
               <Nav.Link href='/sets'>Sets</Nav.Link>
-              <Nav.Link href={'/favorites/sets/' + this.state.user}>Favorites</Nav.Link>
+              <Nav.Link href={'/favorite/sets/' + this.state.user}>Favorites</Nav.Link>
               <Nav.Link onClick={this.logout}>Logout</Nav.Link>
             </Nav>
             <Form inline>
