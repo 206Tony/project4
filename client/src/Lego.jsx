@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import LegoSetsList from './LegoSetsList';
-// import LegoThemes from './LegoThemes';
+import LegoThemes from './LegoThemes';
 import Nav from './Nav';
 import axios from 'axios';
 import {
@@ -9,7 +9,7 @@ import {
   Link
 } from 'react-router-dom';
 
-function Lego() {
+function Lego(props) {
   const [legoSets, setLegoSets] = useState([])
   const [legoSetsId, setLegoSetsId] = useState({})
   const [user, setUserId] = useState([])
@@ -30,7 +30,7 @@ function Lego() {
   // ])
 
   useEffect( () => {
-    axios.get([sets]).then((res) => { 
+    axios.get(sets).then((res) => { 
       setLegoSets(res.data.results);
       console.log("Running this many times...")
     })
@@ -43,12 +43,12 @@ function Lego() {
     })
   }, [])
 
-  // useEffect( () => {
-  //   console.log("Running all the sets...")
-  //   axios.get(`/api/${user._id}/${legoSets}`).then((res) => {
-  //     setUserId(res.data);
-  //   })
-  // }, [user])
+  useEffect( () => {
+    console.log("Running all the sets...")
+    axios.get(`/api/${props.body.user._id}`).then((res) => {
+      setUserId(res.data);
+    })
+  }, [user])
 
 
   return (
@@ -56,7 +56,7 @@ function Lego() {
     <Router>
       <div>
         <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSetsId={setLegoSetsId}/>}/>
-        {/* <Route exact path='/themes' render = { () => <LegoThemes themes={themes}/> } /> */}
+        <Route exact path='/themes' render = { () => <LegoThemes themes={themes}/> } /> */}
         <Route exact path='/*' render = { () =><Nav themes={themes}/> }/>
       </div>
     </Router>

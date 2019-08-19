@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
-import Lego from './Lego';
+import Nav from './Nav';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -86,8 +86,8 @@ class App extends React.Component {
       <>
         
         <div>
-          <Route exact path="/themes" render = {() => <Lego />} />
-          <Route exact path={`/api/${user._id}/`} render = {() => <Lego />} /> 
+          
+          {/* <Route exact path={`/api/${user._id}/`} render = {() => <Lego />} />  */}
         </div>
         </>
       );
@@ -103,7 +103,8 @@ class App extends React.Component {
       )
     }
     return (
-      <Router>      
+      <Router>  
+        <Nav />    
         {contents} 
       </Router>
     );
