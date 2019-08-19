@@ -10,7 +10,6 @@ import {
   Link
 } from 'react-router-dom';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -79,21 +78,16 @@ class App extends React.Component {
   }
 
   render() {
+    
     var user = this.state.user
     var contents = ''
     if (user) {
       contents = (
       <>
-        <nav className="link"> 
-          <Link to='/' >Home</Link>{' '}
-          <Link to='/themes' >Themes</Link>{' '}
-          <Link to='/sets' >Sets</Link>{' '}
-          <Link to={`/favorites/${user._id}/${req.body.data}`} >Favorites</Link>{' '}
-        </nav>
+        
         <div>
-          <Route exact path="/sets" render = {() => <Lego />} />
-          {/* <Route exact path="/themes" render = {() => <Lego />} />
-          <Route exact path={`/api/${user._id}/${sets}/`} render = {() => <Lego />} /> */}
+          <Route exact path="/themes" render = {() => <Lego />} />
+          <Route exact path={`/api/${user._id}/`} render = {() => <Lego />} /> 
         </div>
         </>
       );

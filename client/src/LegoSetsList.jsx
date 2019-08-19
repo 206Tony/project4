@@ -1,8 +1,8 @@
 import React from 'react';
 
-function MySets({legoSets, setLegoSetsId}) {
+function LegoSetsList({legoSets, setLegoSetsId}) {
   let contents;
-  if (legoSets.length) {
+  if (legoSets.length - 1) {
     contents = legoSets.map((legoSet, id) => {
       return (
       <div className='set-container' key={id}>
@@ -25,7 +25,7 @@ function MySets({legoSets, setLegoSetsId}) {
     </div>
   );
 }
-export default MySets;
+export default LegoSetsList;
 
 // import React from 'react';
 
