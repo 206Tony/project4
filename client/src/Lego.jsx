@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import LegoSetsList from './LegoSetsList';
 // import LegoThemes from './LegoThemes';
+//import Favorites from './Favorites';
 import AddFaves from './AddFav';
 import axios from 'axios';
 import {
@@ -24,7 +25,7 @@ function Lego(props) {
           Authorization: `Bearer ${props.token}`
       }
   }
-    axios.post('/api/sets/', (legoSets.map(legoSet => ( legoSet.name) )), config).then((res) => {
+    axios.post('/api/sets/', legoSets.map(legoSet => ( legoSet.name) ), config).then((res) => {
       axios.get(`/api/sets/${legoSets}`,config).then((res) => {
         setFavorites(res.data)
       
@@ -75,6 +76,7 @@ function Lego(props) {
       <div>
         <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSetsId={setLegoSetsId} addFav={addFav}/>}/>
         <AddFaves favorites={favorites}  legoSetsId={legoSetsId} handleSetDelete={handleSetDelete}/>
+        {/* <Router exact path='/favorite/sets' render = { () => <Favorites legoSets={legoSets}/>} /> */}
       </div>
     </Router>
   )
