@@ -7,7 +7,6 @@ function LegoSetsList({legoSets, setLegoSetsId, addFav}) {
       return (
       <div className='set-container' key={id}>
         <h1 onClick={ () => setLegoSetsId(legoSet.name)}>{legoSet.name}</h1>
-        
         <h3>{legoSet.year}</h3>
         <h3>Set: {legoSet.set_num}</h3> <br />
         <button onClick={() => addFav(legoSet.name)} type="submit">Add to Favorites</button><br/>

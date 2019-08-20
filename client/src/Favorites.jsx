@@ -2,10 +2,10 @@
 
 // function Favorites({legoSets}) {
 //   let content;
-//   content = legoSets.map((usersSets, id) => {
+//   content = legoSets.map((legoSet, id) => {
 //     return (
 //       <div key={id}>
-//         <h1>{usersSets.name}</h1>
+//         <h1>{legoSet.name}</h1>
       
 //       </div>
 //     )

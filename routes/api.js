@@ -1,26 +1,31 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const SetsOwned = require('../models/setsOwned');
 const ParksNeeded = require('../models/partsNeeded');
 const Comment= require('../models/comment');
+
 //onst PartsNeeded = require('../models/partsNeeded');
 
-// router.get('/', (req, res) => {
-//   res.json({type: 'success', message: 'You accessed the protected api routes'});
+// router.get('/sets', (req, res) => {
+//   axios.get(`https://rebrickable.com/api/v3/lego/sets/?key=${process.env.LEGO_API}`)
+//   .then(res => {
+//     res.json(res.data)
+//   })
 // });
 
-router.get('/sets', (req, res) => {
-  SetsOwned.findById(req.params.setid, (err, set) => {
-    if (err) res.json(err)
-    res.json(set)
-  })
-})
+// router.get('/sets', (req, res) => {
+//   SetsOwned.findById, (err, set) => {
+//     if (err) res.json(err)
+//     res.json(set)
+//   })
+// })
 
-router.get('/sets/:setId', (req, res) => {
+router.get('/sets', (req, res) => {
   User.findById(req.user._id).populate('setsOwned').exec((err, user) => {
     if (err) res.json(err)
-    res.json(user)
+    res.json(user.setsOwned)
   }) 
 })
 
@@ -35,10 +40,10 @@ router.post('/sets', (req, res) => {
         user.setsOwned.push(set)
         user.save(function(err, user){
         if (err) res.json(err)
-          user.findById(req.user._id).populate('setsOwned').exec((err, user) => {
+          User.findById(req.user._id).populate('setsOwned').exec((err, user) => {
         // populate user 
         // then send forward user.setsOwned
-        res.json(user.setOwned)
+        res.json(user.setsOwned)
         })
       })
     })

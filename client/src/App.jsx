@@ -4,9 +4,11 @@ import Login from './Login';
 import Signup from './Signup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import Lego from './Lego';
-//import MyNav from './MyNav';
+// import Favorites from './Favorites';
+// import AddFaves from './AddFav';
+// import LegoSetsList from './LegoSetsList';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -23,6 +25,7 @@ class App extends React.Component {
       errorMessage: '',
       apiData: null,
       current: {},
+      legoSets: [],
       themes: []
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
@@ -146,7 +149,7 @@ class App extends React.Component {
               } 
               </NavDropdown>
               <Nav.Link href='/sets'>Sets</Nav.Link>
-              <Nav.Link href={'/favorite/sets/' + this.state.user}>Favorites</Nav.Link>
+              <Nav.Link href={'/favorite/sets/'}>Favorites</Nav.Link>
               <Nav.Link onClick={this.logout}>Logout</Nav.Link>
             </Nav>
             <Form inline>
@@ -157,7 +160,12 @@ class App extends React.Component {
           <br />
         </div>     
         {contents}
+        <div>
         <Lego user={user} token={this.state.token} />  
+        {/* <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSetsId={setLegoSetsId} addFav={addFav}/>}/>
+        <AddFaves favorites={favorites}  legoSetsId={legoSetsId} handleSetDelete={handleSetDelete}/>
+        <Router exact path={`/favorite/sets/${legoSets}`} render = { () => <Favorites legoSets={legoSets}/>} /> */}
+      </div>
       </Router>
     );
   }
