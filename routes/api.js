@@ -6,18 +6,18 @@ const ParksNeeded = require('../models/partsNeeded');
 const Comment= require('../models/comment');
 //onst PartsNeeded = require('../models/partsNeeded');
 
-router.get('/', (req, res) => {
-  res.json({type: 'success', message: 'You accessed the protected api routes'});
-});
+// router.get('/', (req, res) => {
+//   res.json({type: 'success', message: 'You accessed the protected api routes'});
+// });
 
-router.get('/sets/:setid', (req, res) => {
+router.get('/sets', (req, res) => {
   SetsOwned.findById(req.params.setid, (err, set) => {
     if (err) res.json(err)
     res.json(set)
   })
 })
 
-router.get('/sets', (req, res) => {
+router.get('/sets/:setId', (req, res) => {
   User.findById(req.user._id).populate('setsOwned').exec((err, user) => {
     if (err) res.json(err)
     res.json(user)
@@ -25,6 +25,7 @@ router.get('/sets', (req, res) => {
 })
 
 router.post('/sets', (req, res) => {
+  console.log("REQ USER", req.user)
   User.findById(req.user._id, function(err, user) {
     SetsOwned.create({
       setApiId: req.body.setApiId,

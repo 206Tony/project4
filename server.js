@@ -41,7 +41,7 @@ db.on('error', (err) => {
 // app.use('/auth/signup', signupLimiter);
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));  //.unless({method: 'POST'}) to lock down the post route otherwise we locked down all routes
+app.use('/api', expressJWT({secret: process.env.JWT_SECRET}),require('./routes/api'));  //.unless({method: 'POST'}) to lock down the post route otherwise we locked down all routes
 // app.get('/something', function(req, res) {
 //   res.send('hello')
 // })

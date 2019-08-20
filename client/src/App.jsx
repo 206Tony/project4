@@ -10,8 +10,8 @@ import Lego from './Lego';
 import './App.css';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  // Route,
+  // Link
 } from 'react-router-dom';
 
 class App extends React.Component {
@@ -157,7 +157,7 @@ class App extends React.Component {
           <br />
         </div>     
         {contents}
-        <Lego user={user} />  
+        <Lego user={user} token={this.state.token} />  
       </Router>
     );
   }
