@@ -162,9 +162,6 @@ class App extends React.Component {
         {contents}
         <div>
         <Lego user={user} token={this.state.token} />  
-        {/* <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSetsId={setLegoSetsId} addFav={addFav}/>}/>
-        <AddFaves favorites={favorites}  legoSetsId={legoSetsId} handleSetDelete={handleSetDelete}/>
-        <Router exact path={`/favorite/sets/${legoSets}`} render = { () => <Favorites legoSets={legoSets}/>} /> */}
       </div>
       </Router>
     );

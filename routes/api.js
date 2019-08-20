@@ -50,14 +50,14 @@ router.post('/sets', (req, res) => {
   })
 })
 
-router.delete('/sets/:set', (req, res) => {
+router.delete('/sets/:id', (req, res) => {
   User.findById(req.user._id, (err, user) => {
     user.setsOwned.splice(req.params.set)
     user.save(err => {
       if (err) res.json(err)
       // Brick.deleteOne({_id: req.body.brickId}, err => {
       //   if (err) res.json(err)
-        res.json(user)
+        res.json(user.setOwned)
       })
     })
   })
