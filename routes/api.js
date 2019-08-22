@@ -2,48 +2,34 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const SetsOwned = require('../models/setsOwned');
+const Set = require('../models/set');
 const ParksNeeded = require('../models/partsNeeded');
 const Comment= require('../models/comment');
 
 //onst PartsNeeded = require('../models/partsNeeded');
 
-// router.get('/sets', (req, res) => {
-//   axios.get(`https://rebrickable.com/api/v3/lego/sets/?key=${process.env.LEGO_API}`)
-//   .then(res => {
-//     res.json(res.data)
-//   })
-// });
-
-// router.get('/sets', (req, res) => {
-//   SetsOwned.findById, (err, set) => {
-//     if (err) res.json(err)
-//     res.json(set)
-//   })
-// })
-
-router.get('/sets', (req, res) => {
-  User.findById(req.user._id).populate('setsOwned').exec((err, user) => {
+router.get('/sets', (req, res) => { 
+  User.findById(req.user._id).populate('set').exec((err, user) => {
     if (err) res.json(err)
-    res.json(user.setsOwned)
+    res.json(user)
   }) 
 })
 
 router.post('/sets', (req, res) => {
   console.log("REQ USER", req.user)
   User.findById(req.user._id, function(err, user) {
-    SetsOwned.create({
-      setApiId: req.body.setApiId,
+    Set.create({
+      setName: req.body.setName,
       user: req.params._id
   }, 
       function(err, set){
-        user.setsOwned.push(set)
+        user.set.push(set)
         user.save(function(err, user){
         if (err) res.json(err)
-          User.findById(req.user._id).populate('setsOwned').exec((err, user) => {
+          User.findById(req.user._id).populate('set').exec((err, user) => {
         // populate user 
-        // then send forward user.setsOwned
-        res.json(user.setsOwned)
+        // then send forward user.set
+        res.json(user.set)
         })
       })
     })
@@ -52,21 +38,143 @@ router.post('/sets', (req, res) => {
 
 router.delete('/sets/:id', (req, res) => {
   User.findById(req.user._id, (err, user) => {
-    user.setsOwned.splice(req.params.set)
-    user.save(err => {
+    Set.findByIdAndDelete({
+      _id: req.params.id
+    },
+      (err, user) => {
       if (err) res.json(err)
-      // Brick.deleteOne({_id: req.body.brickId}, err => {
-      //   if (err) res.json(err)
-        res.json(user.setOwned)
+      console.log("here", req.params.id)
       })
     })
   })
 
+
+
+
+
+
+
+// router.get('/', (req, res) => {
+//   res.send('server working');
+// })
+
+// router.get('/sets', (req, res) => {
+//   Set.find({}, function (err, sets) {
+//       if (err) res.json(err)
+//       res.json(sets)
+//   })
+// })
+
+// router.get("/sets/:sid", (req, res) => {
+//   Set.findById(req.params.sid, (err, set) => {
+//   if (err) res.json(err)
+//   res.json(sset)
+//   })
+// })
+
+// router.post('/sets/', (req, res) =>{
+//   User.findById(req.user._id, function(err, user) {
+//     Set.create({
+//       setName: req.body.setName,
+//       user: req.params.userid
+//       }, function(err,set){
+//           user.set.push(set)
+//           user.save(function(err, user){
+//             if (err) res.json(err)
+//             res.json(user)
+//       })
+//     })
+//   })
+// })
+
+// router.put('/sets/:sid', (req, res) => {
+//   User.findById(req.user._id, function(err, user) {
+//       Set.findByIdAndUpdate (
+//         req.params.sid,
+//         {
+//           setName: req.body.setName,
+//           user: req.params.userid
+//         },
+//         (err, set) => {
+//           if (err) res.json(err)
+//           res.json(set)
+//         }
+//       )
+//     }
+//   )
+// })
+
+// router.delete('/sets/:sid', (req, res) => {
+//   User.findById(req.user._id, (err, user) => {
+//     Set.deleteOne({_id: req.params.sid}, (err, user) => {
+//     if (err) res.json(err)
+//     res.json(user);
+//     })
+//   })
+// })
+  
 module.exports = router;
 
 
 
+// router.get('/', (req, res) => {
+//   res.send('server working');
+// })
 
+// router.get('/sets', (req, res) => {
+//   Set.find({}, function (err, sets) {
+//       if (err) res.json(err)
+//       res.json(sets)
+//   })
+// })
+
+// router.get("/sets/:sid", (req, res) => {
+//   Set.findById(req.params.sid, (err, set) => {
+//   if (err) res.json(err)
+//   res.json(sset)
+//   })
+// })
+
+// router.post('/sets/', (req, res) =>{
+//   User.findById(req.user._id, function(err, user) {
+//     Set.create({
+//       setName: req.body.setName,
+//       user: req.params.userid
+//       }, function(err,set){
+//           user.set.push(set)
+//           user.save(function(err, user){
+//             if (err) res.json(err)
+//             res.json(user)
+//       })
+//     })
+//   })
+// })
+
+// router.put('/sets/:sid', (req, res) => {
+//   User.findById(req.user._id, function(err, user) {
+//       Set.findByIdAndUpdate (
+//         req.params.sid,
+//         {
+//           setName: req.body.setName,
+//           user: req.params.userid
+//         },
+//         (err, stock) => {
+//           if (err) res.json(err)
+//           res.json(set)
+//         }
+//       )
+//     }
+//   )
+// })
+
+// router.delete('/sets/:sid', (req, res) => {
+//   User.findById(req.user._id, (err, user) => {
+//     Set.deleteOne({_id: req.params.sid}, (err, user) => {
+//     if (err) res.json(err)
+//     res.json(user);
+//     })
+//   })
+// })
 
 
 

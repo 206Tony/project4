@@ -1,48 +1,43 @@
 import React, { useState, useEffect} from 'react';
 import LegoSetsList from './LegoSetsList';
-//import Favorites from './Favorites';
 import AddFav from './AddFav';
 import axios from 'axios';
 import {
-  BrowserRouter as Router,
-  Route,
+  //BrowserRouter as Router,
+  Route
   // Link
 } from 'react-router-dom';
 
 function Lego(props) {
-  var config = {
+  const config = {
     headers: {
       Authorization: `Bearer ${props.token}`
     }
   }
-  console.log("LEGOPROPS",props)
   const user = props.user;
   const sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd';
   const [legoSets, setLegoSets] = useState([])
-  const [legoSetsId, setLegoSetsId] = useState('')
+  const [legoSet, setLegoSet] = useState('')
   const [favorites, setFavorites] = useState([])
-  
-  const addFav = (legoSets) => {
-    const newFav = [...favorites, legoSets]
+
+  const addFav = (legoSet) => {
+    const newFav = [...favorites, legoSet]
     setFavorites(newFav);
-    var config = {
-      headers: {
-        Authorization: `Bearer ${props.token}`
-      }
-    }
-    axios.post('/api/sets/', {setApiId: favorites, _id: user._id}, config).then((res) => {
-      axios.get('/api/sets/', config).then((res) => {
+  
+    axios.post('/api/sets', {setName: legoSet, _id: user._id}, config).then((res) => {
+      axios.get('/api/sets', config).then((res) => {
+        console.log(res.data)
         setFavorites(res.data)
       })
     })
   }
   
   // console.log("TOK", legoSets)
-  const handleSetDelete = (favorites) => {
-    axios.delete('/api/sets/'+ favorites, config).then((res) => {
+  const handleSetDelete = (current) => {
+    axios.delete(`/api/sets/${current}`, config).then((res) => {
       axios.get('/api/sets', config).then((res) => {
-        let fav = res.data.map(favorites => (
-          favorites.name
+        let fav = res.data.map(legoSet => (
+          legoSet.name
         ))
          setFavorites(fav)
       })
@@ -50,28 +45,31 @@ function Lego(props) {
   } 
   
   useEffect( () => {
+    //console.log("config", config)
     axios.get(sets).then((res) => { 
       setLegoSets(res.data.results);
-      // console.log("Running this many times...")
     })
   }, [])
 
   useEffect( () => {
-    console.log('useeffect2',config)
-    axios.get('/api/sets', config).then((res) => {
-      setFavorites(res.data)
-    })
-  },[props.token])
+    console.log("config", config)
+    if (props.token) {
+      axios.get('/api/sets', config).then((res) => { 
+        setLegoSet(res.data);
+        setFavorites(res.data.set)
+      })
+    }
+  }, [props.token])
 
   return (
     <>
-      <Router>
-        <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} setLegoSets={setLegoSets} addFav={addFav}/> } />
-        <Route exact path='/favorite/sets' render = { () => <AddFav favorites={favorites}  legoSetsId={legoSetsId} handleSetDelete={handleSetDelete}/>}/>
-      </Router>
+      <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} user={user} addFav={addFav}/> } />
+      <Route exact path='/favorites' render = { () => <AddFav legoSets={legoSets} favorites={favorites} handleSetDelete={handleSetDelete}/> } />
     </>
   )
 }
 
 export default Lego;
+
+
 

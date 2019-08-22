@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     minlength: [5, 'Email must be between 5 and 99 characters'],
     maxlength: [99, 'Email must be between 5 and 99 characters']
   },
-  setsOwned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SetsOwned' }],
+  set: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Set' }],
   partsNeeded: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PartsNeeded' }],
   comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
@@ -31,9 +31,9 @@ userSchema.set('toObject', {
       _id: ret._id,
       email: ret.email,
       name: ret.name,
-      setsOwned: ret.setsOwned,
+      set: ret.set,
       partsNeeded: ret.partsNeeded,
-      comments: ret.comments
+      comment: ret.comment
     }
     return returnJson
   }

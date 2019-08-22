@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LegoSetsList({legoSets, setLegoSets, addFav}) {
+function LegoSetsList({legoSets, addFav}) {
   let contents;
   if (legoSets) {
     contents = legoSets.map((legoSet, id) => {

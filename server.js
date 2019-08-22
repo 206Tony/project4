@@ -28,7 +28,7 @@ const signupLimiter = new RateLimit({
   message: "Maximum accounts created. Please try again later."
 })
 
-mongoose.connect('mongodb://localhost/jwtAuth', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/lego', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.once('open', () => {
   console.log(`Connected to Mongo on ${db.host}:${db.port}`);
@@ -41,10 +41,8 @@ db.on('error', (err) => {
 // app.use('/auth/signup', signupLimiter);
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}),require('./routes/api'));  //.unless({method: 'POST'}) to lock down the post route otherwise we locked down all routes
-// app.get('/something', function(req, res) {
-//   res.send('hello')
-// })
+app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api')); 
+
 app.get('*', function(req, res) {
 	res.sendFile(__dirname + '/client/build/index.html');  // from drinks
 });

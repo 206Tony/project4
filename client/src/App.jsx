@@ -12,8 +12,8 @@ import Lego from './Lego';
 import './App.css';
 import {
   BrowserRouter as Router,
-  // Route,
-  // Link
+  //Route,
+  Link 
 } from 'react-router-dom';
 
 class App extends React.Component {
@@ -79,7 +79,7 @@ class App extends React.Component {
       .then((res) => {
         const themes = res.data.results
         this.setState({themes}); 
-      //console.log("Running this many times...")
+      console.log("Running this many times...")
       })
   }
 
@@ -112,17 +112,16 @@ class App extends React.Component {
   }
 
   render() {
-    var user = this.state.user
+    // var user = this.state.user
     var Nav = require('react-bootstrap/Nav');
     var Navbar = require("react-bootstrap/Navbar");
     var NavDropdown = require("react-bootstrap/NavDropdown");
-    //
-    //var sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd'
+  
     var contents = ''
-    if (user) {
+    if (this.state.user) {
       contents = (
       <>
-        <h1>Hello, {user.name}</h1>
+        <h1>Hello, {this.state.user.name}</h1>
       </>
       );
     } else {
@@ -136,34 +135,37 @@ class App extends React.Component {
         </div>
       )
     }
+    
     return (
-      <Router>
-        <div>
-          <Navbar bg="dark" variant="dark">
-            <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <NavDropdown title="Themes" id="collasible-nav-dropdown">
-                {this.state.themes.map((theme, id) => ( 
-                <NavDropdown.Item href={`/themes`} key={id}>{theme.name}</NavDropdown.Item>
-                ))
-              } 
-              </NavDropdown>
-              <Nav.Link href='/sets'>Sets</Nav.Link>
-              <Nav.Link href={'/favorite/sets/'}>Favorites</Nav.Link>
-              <Nav.Link onClick={this.logout}>Logout</Nav.Link>
-            </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-info">Search</Button>
-            </Form>
-          </Navbar>
-          <br />
-        </div>     
-        {contents}
-        <div>
-        <Lego user={user} token={this.state.token} />  
-      </div>
-      </Router>
+      <>
+        <Router>
+          <div>
+            <Navbar bg="dark" variant="dark">
+              <Nav className="mr-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <NavDropdown title="Themes" id="collasible-nav-dropdown">
+                  {this.state.themes.map((theme, id) => ( 
+                  <NavDropdown.Item as={Link } to={`/themes`} key={id}>{theme.name}</NavDropdown.Item>
+                  ))
+                } 
+                </NavDropdown>
+                <Nav.Link as={Link} to='/sets'>Sets</Nav.Link>
+                <Nav.Link as={Link} to='/favorites'>Favorites</Nav.Link>
+                <Nav.Link onClick={this.logout}>Logout</Nav.Link>
+              </Nav>
+              <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <Button variant="outline-info">Search</Button>
+              </Form>
+            </Navbar>
+            <br />
+          </div>     
+          {contents}
+          <div>
+          <Lego user={this.state.user} token={this.state.token}/> 
+        </div>
+        </Router>
+      </>
     );
   }
 }
