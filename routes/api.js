@@ -9,6 +9,7 @@ const Comment= require('../models/comment');
 //onst PartsNeeded = require('../models/partsNeeded');
 
 router.get('/sets', (req, res) => { 
+  console.log(" hereeeee")
   User.findById(req.user._id).populate('set').exec((err, user) => {
     if (err) res.json(err)
     res.json(user)
@@ -17,18 +18,23 @@ router.get('/sets', (req, res) => {
 
 router.post('/sets', (req, res) => {
   console.log("REQ USER", req.user)
+  // add set from user with relationship
+  // first find our user
   User.findById(req.user._id, function(err, user) {
+    //create a new set 
     Set.create({
       setName: req.body.setName,
-      user: req.params._id
+      user: req.user._id
   }, 
       function(err, set){
+        //add set to user
         user.set.push(set)
+        //save info
         user.save(function(err, user){
         if (err) res.json(err)
-          User.findById(req.user._id).populate('set').exec((err, user) => {
-        // populate user 
-        // then send forward user.set
+        // find user again with set details
+        User.findById(req.user._id).populate('set').exec((err, user) => {
+        // send new user info back
         res.json(user.set)
         })
       })
@@ -38,13 +44,17 @@ router.post('/sets', (req, res) => {
 
 router.delete('/sets/:id', (req, res) => {
   User.findById(req.user._id, (err, user) => {
-    Set.findByIdAndDelete({
-      _id: req.params.id
-    },
-      (err, user) => {
-      if (err) res.json(err)
-      console.log("here", req.params.id)
+    user.set.pull(req.params.id);
+    user.save(err => {
+      Set.findByIdAndDelete({
+        _id: req.params.id
+      },(err) => {
+        if (err) res.json(err)
+        console.log("here", req.params.id)
+        res.send('deleted');
+        })
       })
+
     })
   })
 

@@ -24,11 +24,12 @@ function Lego(props) {
     const newFav = [...favorites, legoSet]
     setFavorites(newFav);
   
-    axios.post('/api/sets', {setName: legoSet, _id: user._id}, config).then((res) => {
-      axios.get('/api/sets', config).then((res) => {
-        console.log(res.data)
-        setFavorites(res.data)
-      })
+    axios.post('/api/sets', {_id: user._id, setName: legoSet}, config).then((fav) => {
+      setFavorites(fav.data);
+      // axios.get('/api/sets', config).then((res) => {
+      //   console.log(res.data)
+      //   setFavorites(res.data.set)
+      // })
     })
   }
   
@@ -36,10 +37,8 @@ function Lego(props) {
   const handleSetDelete = (current) => {
     axios.delete(`/api/sets/${current}`, config).then((res) => {
       axios.get('/api/sets', config).then((res) => {
-        let fav = res.data.map(legoSet => (
-          legoSet.name
-        ))
-         setFavorites(fav)
+        console.log('user after delete: ', res.data)
+         setFavorites(res.data.set)
       })
     })
   } 
@@ -55,6 +54,7 @@ function Lego(props) {
     console.log("config", config)
     if (props.token) {
       axios.get('/api/sets', config).then((res) => { 
+        console.log('get user info: ', res.data)
         setLegoSet(res.data);
         setFavorites(res.data.set)
       })
@@ -64,7 +64,7 @@ function Lego(props) {
   return (
     <>
       <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} user={user} addFav={addFav}/> } />
-      <Route exact path='/favorites' render = { () => <AddFav legoSets={legoSets} favorites={favorites} handleSetDelete={handleSetDelete}/> } />
+      <Route exact path='/favorites' render = { () => <AddFav favorites={favorites} handleSetDelete={handleSetDelete}/> } />
     </>
   )
 }
