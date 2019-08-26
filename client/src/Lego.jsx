@@ -64,7 +64,7 @@ function Lego(props) {
   return (
     <>
       <Route exact path='/sets' render = { () => <LegoSetsList legoSets={legoSets} user={user} addFav={addFav}/> } />
-      <Route exact path='/favorites' render = { () => <AddFav favorites={favorites} handleSetDelete={handleSetDelete}/> } />
+      <Route exact path='/favorites' render = { () => <AddFav favorites={favorites} legoSets={legoSets} handleSetDelete={handleSetDelete}/> } />
     </>
   )
 }

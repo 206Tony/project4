@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project Planning
+In this phase I started planning with my database models. I did research on the API that I used because of the importance of my database route planning depended on the data received back from the API. After finding an API that I was interested in, I built the necessary models. The models were simple because I only had one relation from my parent model (users) to our child model (set). I then moved on to wireframing for our site. This would determine what components I would need and how I would build essential structure for my site. After I was able to work through these items, I then went on to coding.
 
-## Available Scripts
+Project Coding
+During this phase I started building the routes and a skeleton structure of our site. I was able to get routes working fairly quickly. We tested the routes by using Postman. The bare bones skeleton of the website was set and then we moved on to the logic of our website. While working on this part of the project we had some slight hiccups with getting data to render but after some troubleshooting, we were able to get our data sending. Getting data to render from our own API was rather simple but saving data to our database provided some great learning opportunities. After we were able to overcome this slight hurdle, we worked on getting our code to become more dynamic to render individual drinks and user information. We then worked on styling to make sure that everything was presentable.
 
-In the project directory, you can run:
+Wish List
+Filter for the drink list
+Mobile Optimization
+Drink Games
+Dependencies
+React
+ReactRouter
+HTML
+CSS
+MongoDB
+Node.js
+Express
+Kaggle.com
+Support/Sources
+GA Teacher Staff
+StackOverFlow.com
+CSS-Tricks.com
+ReactJS.org Collapse
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+issues backend routes not messing 
+react navbar issues 
+routing issues 
+hook issues 
