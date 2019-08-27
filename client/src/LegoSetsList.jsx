@@ -14,10 +14,8 @@ function LegoSetsList({legoSets, addFav}) {
                           width: '200px',
                           textAlign: 'center',
                           justifyContent: 'space-between'
-              }}/>
+              }}/><br />
         <button onClick={() => addFav(legoSet.name)} type="submit">Add to Favorites</button><br/>
-       
-        <br />
       </div>      
       )
     })
