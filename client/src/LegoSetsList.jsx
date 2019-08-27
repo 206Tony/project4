@@ -5,13 +5,18 @@ function LegoSetsList({legoSets, addFav}) {
   if (legoSets) {
     contents = legoSets.map((legoSet, id) => {
       return (
-      <div className='set-container' key={id}>
-        <h1>{legoSet.name}</h1>
-        <h3>{legoSet.year}</h3>
-        <h3>Set: {legoSet.set_num}</h3> <br />
+      <div  className="list-container" key={id}>
+        <h6>{legoSet.name}</h6>
+        <p>Year: {legoSet.year} Set: {legoSet.set_num}</p> <br />
+        <img src={legoSet.set_img_url} alt={legoSet.set_num} 
+                className='set-container' 
+                  style={{height: '200px',
+                          width: '200px',
+                          textAlign: 'center',
+                          justifyContent: 'space-between'
+              }}/>
         <button onClick={() => addFav(legoSet.name)} type="submit">Add to Favorites</button><br/>
-        <img src={legoSet.set_img_url} alt={legoSet.set_num}/>
-
+       
         <br />
       </div>      
       )
@@ -20,7 +25,7 @@ function LegoSetsList({legoSets, addFav}) {
     contents = <p>No sets found!</p>
   }
   return (
-    <div className="lego-set-list">
+    <div className="list">
       {contents}
     </div>
   );

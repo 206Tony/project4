@@ -121,7 +121,7 @@ class App extends React.Component {
     if (this.state.user) {
       contents = (
       <>
-        <h1>Hello, {this.state.user.name}</h1>
+        <h3>Hello, {this.state.user.name}</h3>
       </>
       );
     } else {
@@ -140,12 +140,12 @@ class App extends React.Component {
       <>
         <Router>
           <div>
-            <Navbar bg="dark" variant="dark">
+            <Navbar fixed="top" bg="dark" variant="dark">
               <Nav className="mr-auto">
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
                 <NavDropdown title="Themes" id="collasible-nav-dropdown">
                   {this.state.themes.map((theme, id) => ( 
-                  <NavDropdown.Item as={Link } to={`/themes`} key={id}>{theme.name}</NavDropdown.Item>
+                  <NavDropdown.Item as={Link } to={'/themes'} key={id}>{theme.name}</NavDropdown.Item>
                   ))
                 } 
                 </NavDropdown>
