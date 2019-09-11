@@ -41,7 +41,7 @@ db.on('error', (err) => {
 // app.use('/auth/signup', signupLimiter);
 
 app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api')); 
+app.use('/api', expressJWT({secret: process.env.JWT_SECRET}),  require('./routes/api')); 
 
 app.get('*', function(req, res) {
 	res.sendFile(__dirname + '/client/build/index.html');  // from drinks

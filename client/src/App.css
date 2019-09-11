@@ -35,28 +35,41 @@ body{
   background-image: url('https://images.unsplash.com/photo-1544816565-aa8c1166648f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=800');
 } */
 
+.list {
+  padding: 5px;
+  font-size: 10px;
+}
+
 .list-container {
   text-align: center;
   display: inline-block;
-  max-width: 300px;
-  margin: 10px;
+  max-width: 250px;
+  margin: 5px;
   border: 2px solid black;
 
+}
+
+.set-title {
+  font-size: 10px;
 }
 
 .set-container {
   text-align: center;
   grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px; 
+  grid-template-rows: 100px auto 80px; 
   grid-column-gap: 10px;
-  grid-row-gap: 15px;
+  grid-row-gap: 10px;
 }
 
-/* .list {
-  display: inline-flex;
-  justify-content: space-evenly;
-  padding: 5px;
-} */
+.dropdown-menu {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.add-button {
+  width: 200px;
+}
+
 
 /* .list-image {
   height: 20%;

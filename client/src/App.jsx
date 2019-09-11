@@ -1,10 +1,12 @@
 import React from 'react';
+//import env from './.env';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Pagination from 'react-bootstrap/Pagination';
 import Lego from './Lego';
 // import Favorites from './Favorites';
 // import AddFaves from './AddFav';
@@ -75,7 +77,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.checkForLocalToken()
-    axios.get('https://rebrickable.com/api/v3/lego/themes/?key=36e941f5870960d3742c4fa017ce16fd')
+    axios.get('https://rebrickable.com/api/v3/lego/themes/?key=36e941f5870960d3742c4fa017ce16fd&page_size=700')
       .then((res) => {
         const themes = res.data.results
         this.setState({themes}); 
@@ -145,7 +147,7 @@ class App extends React.Component {
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
                 <NavDropdown title="Themes" id="collasible-nav-dropdown">
                   {this.state.themes.map((theme, id) => ( 
-                  <NavDropdown.Item as={Link } to={'/themes'} key={id}>{theme.name}</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={'/themes'} key={id}>{theme.name}</NavDropdown.Item>
                   ))
                 } 
                 </NavDropdown>
@@ -163,6 +165,7 @@ class App extends React.Component {
           {contents}
           <div>
           <Lego user={this.state.user} token={this.state.token}/> 
+          <Pagination user={this.state.user} token={this.state.token}/> 
         </div>
         </Router>
       </>

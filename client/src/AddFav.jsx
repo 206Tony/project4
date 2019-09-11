@@ -11,6 +11,7 @@ function AddFav({favorites, handleSetDelete}) {
       </div>
     )
   })
+  
   return (
     <div className="set-favs">
       {content}

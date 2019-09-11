@@ -15,7 +15,7 @@ function Lego(props) {
     }
   }
   const user = props.user;
-  const sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd';
+  const sets = 'https://rebrickable.com/api/v3/lego/sets/?key=36e941f5870960d3742c4fa017ce16fd&page_size=15100';
   const [legoSets, setLegoSets] = useState([])
   const [legoSet, setLegoSet] = useState('')
   const [favorites, setFavorites] = useState([])
